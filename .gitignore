@@ -1,0 +1,71 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Python tool files
+.Python
+pip-wheel-metadata/
+pip-log.txt
+
+# Django files
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Media and static (se você estiver versionando via collectstatic numa pasta separada)
+media/
+staticfiles/
+static/
+# Se não quiser ignorar as suas próprias static assets versionadas, comente a linha acima
+
+# Django migrations (opcional: geralmente as migrações são versionadas)
+**/migrations/*.pyc
+**/migrations/__pycache__/
+
+# Environment variables
+.env
+.env.*
+
+# Test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+htmlcov/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
