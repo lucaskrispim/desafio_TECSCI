@@ -37,28 +37,28 @@ class Command(BaseCommand):
 
             pot = entry.get("potencia_ativa_watt")
             if pot is None:
-                self.stderr.write(f"  → ERROR: 'potencia_ativa_watt' ausente ou nulo; pulando entrada")
+                self.stderr.write(f"ERROR: 'potencia_ativa_watt' ausente ou nulo; pulando entrada")
                 continue
 
             temp = entry.get("temperatura_celsius")
             if temp is None:
-                self.stderr.write(f"  → ERROR: 'temperatura_celsius' ausente ou nulo; pulando entrada")
+                self.stderr.write(f"ERROR: 'temperatura_celsius' ausente ou nulo; pulando entrada")
                 continue
 
             dt_field = None
             try:
                 dt_field = entry["datetime"]["$date"]
             except Exception:
-                self.stderr.write(f"  → ERROR: campo 'datetime.$date' inválido ou ausente; pulando entrada")
+                self.stderr.write(f"ERROR: campo 'datetime.$date' inválido ou ausente; pulando entrada")
                 continue
             ts = parse_datetime(dt_field)
             if ts is None:
-                self.stderr.write(f"  → ERROR: formato de data inválido ({dt_field}); pulando entrada")
+                self.stderr.write(f"ERROR: formato de data inválido ({dt_field}); pulando entrada")
                 continue
 
             inv_id = entry.get("inversor_id")
             if inv_id is None:
-                self.stderr.write(f"  → ERROR: 'inversor_id' ausente; pulando entrada")
+                self.stderr.write(f"ERROR: 'inversor_id' ausente; pulando entrada")
                 continue
 
             usina = usina1 if 1 <= inv_id <= 4 else usina2
@@ -80,7 +80,6 @@ class Command(BaseCommand):
             self.stderr.write("Nenhuma leitura válida para inserir. Verifique os erros acima.")
             return
 
-        # bulk create
         Leitura.objects.bulk_create(leituras, batch_size=500)
         self.stdout.write(self.style.SUCCESS(
             f"Seed completo! {len(leituras)} leituras inseridas com sucesso."
