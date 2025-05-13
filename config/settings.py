@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(pj+%y4n=9vhuxk7cnqtz*h0zfwvi*_eqwwaklz2y64r^0nsvg'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG") == "True"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 ALLOWED_HOSTS = ['*']
 
@@ -81,7 +84,6 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'API de Produção Solar',
     'DESCRIPTION': 'Documentação automática com Swagger UI',
     'VERSION': '1.0.0',
-    # outras opções opcionais…
 }
 
 WSGI_APPLICATION = 'config.wsgi.application'
